@@ -41,14 +41,14 @@ function assignDrones(sortedDrones, sortedShipments){
     unassignedPackageIds = [],
     // checking to see that drone can deliver package before deadline
     for (let i = 0; i < drones.length; i++){
-      if (currentTime + timeToDepo(drones[i]) + timeOfTravel(depo, shipments[0].destination) > shipments[0].deadline){
+      if (currentTime + timeToDepo(sortedDrones[i]) + timeOfTravel(depo, sortedShipments[0].destination) > sortedShipments[0].deadline){
         // remove package from array and put in unassignedPackageIds
-        unassignedPackageIds.push(shipments[0].packageId)
+        unassignedPackageIds.push(sortedShipments[0].packageId)
         sortedShipments.shift()
 
     } else {
-      var singleDrone = {droneId : drones[i].droneId}
-      var singlePackage = {packageId : shipments[0].packageId}
+      var singleDrone = {droneId : sortedDrones[i].droneId}
+      var singlePackage = {packageId : sortedShipments[0].packageId}
       var assignPackage = Object.assign(singleDrone, singlePackage)
       assignments.push(assignPackage)
       // remove singleDrone and singlePackage from arrays
